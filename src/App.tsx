@@ -22,24 +22,36 @@ function App() {
     const savedTheme = localStorage.getItem('theme') as 'auto' | 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+    let newIsDark = true;
+    let newThemeMode: 'auto' | 'light' | 'dark' = 'auto';
+
     if (savedTheme === 'light') {
-      setIsDark(false);
-      setThemeMode('light');
+      newIsDark = false;
+      newThemeMode = 'light';
     } else if (savedTheme === 'dark') {
-      setIsDark(true);
-      setThemeMode('dark');
+      newIsDark = true;
+      newThemeMode = 'dark';
     } else {
       // Auto mode - follow system
-      setIsDark(prefersDark);
-      setThemeMode('auto');
+      newIsDark = prefersDark;
+      newThemeMode = 'auto';
     }
 
-    // Listen to system theme changes
+    setIsDark(newIsDark);
+    setThemeMode(newThemeMode);
+    
+    // Update data-theme attribute for CSS variables
+    document.documentElement.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
+  }, []);
+
+  // Listen to system theme changes when in auto mode
+  useEffect(() => {
+    if (themeMode !== 'auto') return;
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
-      if (themeMode === 'auto') {
-        setIsDark(e.matches);
-      }
+      setIsDark(e.matches);
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     };
 
     mediaQuery.addEventListener('change', handleChange);
@@ -53,15 +65,18 @@ function App() {
       setThemeMode('light');
       setIsDark(false);
       localStorage.setItem('theme', 'light');
+      document.documentElement.setAttribute('data-theme', 'light');
     } else if (themeMode === 'light') {
       setThemeMode('dark');
       setIsDark(true);
       localStorage.setItem('theme', 'dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       setThemeMode('auto');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setIsDark(prefersDark);
       localStorage.setItem('theme', 'auto');
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
     }
   };
 
