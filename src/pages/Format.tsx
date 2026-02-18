@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Button, Space, message, Card, Statistic, Row, Col, Alert } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { 
   FormatPainterOutlined, 
   CompressOutlined, 
@@ -12,6 +13,7 @@ import { formatJson, minifyJson, validateJson, getJsonStats } from '../utils/jso
 import styles from './Format.module.css';
 
 const Format: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   
@@ -21,9 +23,9 @@ const Format: React.FC = () => {
     const result = formatJson(input);
     if (result.success) {
       setOutput(result.data as string);
-      message.success('格式化成功');
+      message.success(t('format.formatSuccess'));
     } else {
-      message.error(`格式化失败: ${result.error}`);
+      message.error(`${t('format.formatFailed')}: ${result.error}`);
     }
   };
   
@@ -31,30 +33,30 @@ const Format: React.FC = () => {
     const result = minifyJson(input);
     if (result.success) {
       setOutput(result.data as string);
-      message.success('压缩成功');
+      message.success(t('format.minifySuccess'));
     } else {
-      message.error(`压缩失败: ${result.error}`);
+      message.error(`${t('format.minifyFailed')}: ${result.error}`);
     }
   };
   
   const handleValidate = () => {
     const result = validateJson(input);
     if (result.valid) {
-      message.success('JSON 格式有效');
+      message.success(t('format.validJson'));
     } else {
-      message.error(`JSON 格式无效: ${result.error}`);
+      message.error(`${t('format.invalidJson')}: ${result.error}`);
     }
   };
   
   const handleCopy = () => {
     navigator.clipboard.writeText(output);
-    message.success('已复制到剪贴板');
+    message.success(t('common.copied'));
   };
   
   const handleClear = () => {
     setInput('');
     setOutput('');
-    message.success('已清空');
+    message.success(t('common.cleared'));
   };
 
   return (
@@ -66,33 +68,33 @@ const Format: React.FC = () => {
             icon={<FormatPainterOutlined />}
             onClick={handleFormat}
           >
-            格式化
+            {t('format.formatBtn')}
           </Button>
           <Button 
             icon={<CompressOutlined />}
             onClick={handleMinify}
           >
-            压缩
+            {t('format.minifyBtn')}
           </Button>
           <Button 
             icon={<CheckCircleOutlined />}
             onClick={handleValidate}
           >
-            验证
+            {t('format.validateBtn')}
           </Button>
           <Button 
             icon={<CopyOutlined />}
             onClick={handleCopy}
             disabled={!output}
           >
-            复制结果
+            {t('common.copyResult')}
           </Button>
           <Button 
             icon={<ClearOutlined />}
             onClick={handleClear}
             danger
           >
-            清空
+            {t('common.clear')}
           </Button>
         </Space>
       </div>
@@ -102,30 +104,30 @@ const Format: React.FC = () => {
           <Row gutter={24}>
             <Col span={4}>
               <Statistic 
-                title="状态" 
-                value={stats.valid ? '有效' : '无效'} 
+                title={t('format.stats.status')} 
+                value={stats.valid ? t('format.stats.valid') : t('format.stats.invalid')} 
                 valueStyle={{ color: stats.valid ? '#52c41a' : '#ff4d4f' }}
               />
             </Col>
             <Col span={4}>
-              <Statistic title="大小" value={stats.size} suffix="bytes" />
+              <Statistic title={t('format.stats.size')} value={stats.size} suffix="bytes" />
             </Col>
             <Col span={4}>
-              <Statistic title="行数" value={stats.lines} />
+              <Statistic title={t('format.stats.lines')} value={stats.lines} />
             </Col>
             {stats.type && (
               <Col span={4}>
-                <Statistic title="类型" value={stats.type} />
+                <Statistic title={t('format.stats.type')} value={stats.type} />
               </Col>
             )}
             {stats.keys !== undefined && (
               <Col span={4}>
-                <Statistic title="键数" value={stats.keys} />
+                <Statistic title={t('format.stats.keys')} value={stats.keys} />
               </Col>
             )}
             {stats.items !== undefined && (
               <Col span={4}>
-                <Statistic title="元素数" value={stats.items} />
+                <Statistic title={t('format.stats.items')} value={stats.items} />
               </Col>
             )}
           </Row>
@@ -134,8 +136,8 @@ const Format: React.FC = () => {
       
       {!stats.valid && input && (
         <Alert 
-          message="JSON 格式错误" 
-          description={stats.valid ? undefined : '请检查输入的 JSON 格式'}
+          message={t('format.jsonError')} 
+          description={stats.valid ? undefined : t('format.checkFormat')}
           type="error" 
           showIcon
           className={styles.alert}
@@ -148,7 +150,7 @@ const Format: React.FC = () => {
             value={input}
             onChange={setInput}
             language="json"
-            title="输入 JSON"
+            title={t('common.input')}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -156,7 +158,7 @@ const Format: React.FC = () => {
             value={output}
             language="json"
             readOnly
-            title="输出结果"
+            title={t('common.outputResult')}
           />
         </div>
       </div>

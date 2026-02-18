@@ -1,3 +1,4 @@
+import './i18n';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider, theme } from 'antd';
 import Layout from './components/Layout';

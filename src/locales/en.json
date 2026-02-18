@@ -1,0 +1,66 @@
+{
+  "app": {
+    "title": "JSON Tools"
+  },
+  "nav": {
+    "format": "Format",
+    "converter": "Converter",
+    "generator": "Generator"
+  },
+  "common": {
+    "copy": "Copy",
+    "copyResult": "Copy Result",
+    "clear": "Clear",
+    "input": "Input JSON",
+    "output": "Output",
+    "outputResult": "Output Result",
+    "copied": "Copied to clipboard",
+    "cleared": "Cleared",
+    "success": "Success",
+    "failed": "Failed"
+  },
+  "format": {
+    "formatBtn": "Format",
+    "minifyBtn": "Minify",
+    "validateBtn": "Validate",
+    "formatSuccess": "Formatted successfully",
+    "formatFailed": "Format failed",
+    "minifySuccess": "Minified successfully",
+    "minifyFailed": "Minify failed",
+    "validJson": "Valid JSON format",
+    "invalidJson": "Invalid JSON format",
+    "jsonError": "JSON Format Error",
+    "checkFormat": "Please check the input JSON format",
+    "stats": {
+      "status": "Status",
+      "valid": "Valid",
+      "invalid": "Invalid",
+      "size": "Size",
+      "lines": "Lines",
+      "type": "Type",
+      "keys": "Keys",
+      "items": "Items"
+    }
+  },
+  "converter": {
+    "jsonToYaml": "JSON → YAML",
+    "jsonToXml": "JSON → XML",
+    "jsonToUrlParams": "JSON → URL Params",
+    "convertBtn": "Convert",
+    "convertSuccess": "Converted successfully",
+    "convertFailed": "Conversion failed",
+    "outputCode": "Output Code"
+  },
+  "generator": {
+    "className": "Class/Type Name",
+    "generateBtn": "Generate Code",
+    "generateSuccess": "Generated successfully",
+    "generateFailed": "Generation failed",
+    "outputCode": "Output Code"
+  },
+  "language": {
+    "switch": "Language",
+    "en": "English",
+    "zh": "中文"
+  }
+}

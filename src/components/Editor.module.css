@@ -21,3 +21,22 @@
   flex: 1;
   min-height: 400px;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .title {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .editorWrapper {
+    min-height: 250px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .editorWrapper {
+    min-height: 200px;
+  }
+}

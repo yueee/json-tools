@@ -21,3 +21,75 @@
   flex: 1;
   min-width: 0;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .toolbar :global(.ant-space) {
+    flex-wrap: nowrap;
+  }
+  
+  .toolbar :global(.ant-btn),
+  .toolbar :global(.ant-select),
+  .toolbar :global(.ant-input) {
+    min-height: 44px;
+    font-size: 13px;
+  }
+  
+  .toolbar :global(.ant-select-selector) {
+    min-height: 44px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .toolbar :global(.ant-input) {
+    padding: 8px 12px;
+  }
+  
+  .editors {
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+  
+  .editorPanel {
+    min-width: 100%;
+    min-height: 280px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toolbar {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+  
+  .toolbar :global(.ant-btn) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .toolbar :global(.ant-select-selector) {
+    padding: 6px 10px !important;
+  }
+  
+  .toolbar :global(.ant-input) {
+    padding: 6px 10px;
+  }
+  
+  .editors {
+    gap: 8px;
+  }
+  
+  .editorPanel {
+    min-height: 250px;
+  }
+}

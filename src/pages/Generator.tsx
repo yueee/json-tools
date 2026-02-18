@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Space, message, Select, Input } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { CodeOutlined, CopyOutlined } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { 
@@ -29,6 +30,7 @@ const languageMap: Record<GeneratorLanguage, string> = {
 };
 
 const Generator: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [language, setLanguage] = useState<GeneratorLanguage>('typescript');
@@ -60,15 +62,15 @@ const Generator: React.FC = () => {
     
     if (result.success) {
       setOutput(result.data as string);
-      message.success('生成成功');
+      message.success(t('generator.generateSuccess'));
     } else {
-      message.error(`生成失败: ${result.error}`);
+      message.error(`${t('generator.generateFailed')}: ${result.error}`);
     }
   };
   
   const handleCopy = () => {
     navigator.clipboard.writeText(output);
-    message.success('已复制到剪贴板');
+    message.success(t('common.copied'));
   };
 
   return (
@@ -82,7 +84,7 @@ const Generator: React.FC = () => {
             style={{ width: 140 }}
           />
           <Input
-            placeholder="类名/类型名"
+            placeholder={t('generator.className')}
             value={rootName}
             onChange={(e) => setRootName(e.target.value)}
             style={{ width: 150 }}
@@ -92,14 +94,14 @@ const Generator: React.FC = () => {
             icon={<CodeOutlined />}
             onClick={handleGenerate}
           >
-            生成代码
+            {t('generator.generateBtn')}
           </Button>
           <Button 
             icon={<CopyOutlined />}
             onClick={handleCopy}
             disabled={!output}
           >
-            复制结果
+            {t('common.copyResult')}
           </Button>
         </Space>
       </div>
@@ -110,7 +112,7 @@ const Generator: React.FC = () => {
             value={input}
             onChange={setInput}
             language="json"
-            title="输入 JSON"
+            title={t('common.input')}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -118,7 +120,7 @@ const Generator: React.FC = () => {
             value={output}
             language={languageMap[language]}
             readOnly
-            title="输出代码"
+            title={t('generator.outputCode')}
           />
         </div>
       </div>

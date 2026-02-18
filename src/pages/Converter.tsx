@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { Button, Space, message, Select } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { SwapOutlined, CopyOutlined } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { jsonToYaml, jsonToXml, jsonToUrlParams } from '../utils/converters';
 import type { ConverterFormat } from '../utils/converters';
 import styles from './Converter.module.css';
 
-const converterOptions = [
-  { label: 'JSON → YAML', value: 'yaml' },
-  { label: 'JSON → XML', value: 'xml' },
-  { label: 'JSON → URL Params', value: 'urlparams' },
-];
-
 const Converter: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [format, setFormat] = useState<ConverterFormat | 'urlparams'>('yaml');
+  
+  const converterOptions = [
+    { label: t('converter.jsonToYaml'), value: 'yaml' },
+    { label: t('converter.jsonToXml'), value: 'xml' },
+    { label: t('converter.jsonToUrlParams'), value: 'urlparams' },
+  ];
   
   const handleConvert = () => {
     let result;
@@ -35,15 +37,15 @@ const Converter: React.FC = () => {
     
     if (result.success) {
       setOutput(result.data as string);
-      message.success('转换成功');
+      message.success(t('converter.convertSuccess'));
     } else {
-      message.error(`转换失败: ${result.error}`);
+      message.error(`${t('converter.convertFailed')}: ${result.error}`);
     }
   };
   
   const handleCopy = () => {
     navigator.clipboard.writeText(output);
-    message.success('已复制到剪贴板');
+    message.success(t('common.copied'));
   };
   
   const getOutputLanguage = (): string => {
@@ -74,14 +76,14 @@ const Converter: React.FC = () => {
             icon={<SwapOutlined />}
             onClick={handleConvert}
           >
-            转换
+            {t('converter.convertBtn')}
           </Button>
           <Button 
             icon={<CopyOutlined />}
             onClick={handleCopy}
             disabled={!output}
           >
-            复制结果
+            {t('common.copyResult')}
           </Button>
         </Space>
       </div>
@@ -92,7 +94,7 @@ const Converter: React.FC = () => {
             value={input}
             onChange={setInput}
             language="json"
-            title="输入 JSON"
+            title={t('common.input')}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -100,7 +102,7 @@ const Converter: React.FC = () => {
             value={output}
             language={getOutputLanguage()}
             readOnly
-            title="输出结果"
+            title={t('converter.outputCode')}
           />
         </div>
       </div>
