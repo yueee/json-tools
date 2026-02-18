@@ -1,0 +1,216 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.mainContent {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.configPanel {
+  width: 400px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.configCard {
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.configCard :global(.ant-card-head) {
+  border-color: #2a2a4a !important;
+  color: #fff !important;
+}
+
+.configCard :global(.ant-card-body) {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.settingItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.settingItem span {
+  color: #888;
+  font-size: 13px;
+}
+
+.fieldList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-y: auto;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  background: #16162a;
+  border-radius: 6px;
+}
+
+.fieldName {
+  flex: 1;
+}
+
+.fieldType {
+  width: 120px;
+}
+
+.fieldOptions {
+  flex: 1;
+}
+
+.fieldOptions::placeholder {
+  color: #666;
+}
+
+.templatesCollapse {
+  border: none;
+  margin-top: auto;
+}
+
+.templatesCollapse :global(.ant-collapse-header) {
+  color: #888 !important;
+  padding: 8px 0 !important;
+}
+
+.templatesCollapse :global(.ant-collapse-content-box) {
+  padding: 8px 0 !important;
+}
+
+.outputPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1e1e3a;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #2a2a4a;
+  border-bottom: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.outputPanel > div:last-child {
+  flex: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toolbar :global(.ant-space) {
+    flex-wrap: nowrap;
+  }
+
+  .toolbar :global(.ant-btn) {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .mainContent {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .configPanel {
+    width: 100%;
+    max-height: 400px;
+  }
+
+  .settings :global(.ant-col) {
+    margin-bottom: 8px;
+  }
+
+  .fieldRow {
+    flex-wrap: wrap;
+  }
+
+  .fieldName {
+    min-width: 100%;
+  }
+
+  .fieldType {
+    flex: 1;
+  }
+
+  .fieldOptions {
+    flex: 1;
+  }
+
+  .outputPanel {
+    min-height: 300px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toolbar {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .toolbar :global(.ant-btn) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .configPanel {
+    max-height: 350px;
+  }
+
+  .fieldRow {
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .outputPanel {
+    min-height: 250px;
+  }
+}
