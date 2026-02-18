@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Layout as AntLayout, Menu, Typography, Button, Space, Dropdown, Drawer } from 'antd';
+import React from 'react';
+import { Layout as AntLayout, Menu, Typography, Button, Space, Dropdown } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -8,26 +8,24 @@ import {
   FileTextOutlined,
   GlobalOutlined,
   CheckOutlined,
-  MenuOutlined,
-  SunOutlined,
-  MoonOutlined
+  DiffOutlined,
+  SearchOutlined,
+  TranslationOutlined,
+  ThunderboltOutlined
 } from '@ant-design/icons';
 import styles from './Layout.module.css';
 
-const { Content } = AntLayout;
-const { Title, Text } = Typography;
+const { Sider, Content, Header } = AntLayout;
+const { Title } = Typography;
 
 interface LayoutProps {
   children: React.ReactNode;
-  isDark: boolean;
-  onToggleTheme: () => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
     {
@@ -44,6 +42,26 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
       key: '/generator',
       icon: <FileTextOutlined />,
       label: t('nav.generator'),
+    },
+    {
+      key: '/diff',
+      icon: <DiffOutlined />,
+      label: t('nav.diff'),
+    },
+    {
+      key: '/path',
+      icon: <SearchOutlined />,
+      label: t('nav.path'),
+    },
+    {
+      key: '/escape',
+      icon: <TranslationOutlined />,
+      label: t('nav.escape'),
+    },
+    {
+      key: '/mock',
+      icon: <ThunderboltOutlined />,
+      label: t('nav.mock'),
     },
   ];
 
@@ -70,99 +88,39 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
     },
   ];
 
-  const handleMenuClick = (key: string) => {
-    navigate(key);
-    setMobileMenuOpen(false);
-  };
-
   return (
     <AntLayout className={styles.layout}>
-      {/* Top Navigation Bar */}
-      <header className={styles.topNav}>
+      <Sider 
+        className={styles.sider}
+        width={200}
+        theme="dark"
+      >
         <div className={styles.logo}>
-          <Title level={4} className={styles.logoText}>
-            JSON Tools
+          <Title level={4} className={styles.title}>
+            {t('app.title')}
           </Title>
         </div>
-
-        {/* Desktop Menu */}
-        <nav className={styles.desktopMenu}>
-          <Menu
-            mode="horizontal"
-            selectedKeys={[location.pathname]}
-            items={menuItems}
-            onClick={({ key }) => navigate(key)}
-            className={styles.menu}
-          />
-        </nav>
-
-        {/* Right Actions */}
-        <div className={styles.rightActions}>
-          {/* Theme Toggle */}
-          <Button
-            type="text"
-            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
-            onClick={onToggleTheme}
-            className={styles.themeBtn}
-            title={isDark ? '切换到亮色模式' : '切换到暗色模式'}
-          />
-          
-          {/* Language Switcher - Desktop */}
-          <Dropdown menu={{ items: languageItems }} placement="bottomRight">
-            <Button icon={<GlobalOutlined />} type="text" className={styles.langBtn}>
-              {i18n.language === 'zh' ? '中文' : 'EN'}
-            </Button>
-          </Dropdown>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <Button
-          className={styles.mobileMenuBtn}
-          type="text"
-          icon={<MenuOutlined />}
-          onClick={() => setMobileMenuOpen(true)}
-        />
-      </header>
-
-      {/* Mobile Drawer */}
-      <Drawer
-        placement="left"
-        open={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-        className={styles.drawer}
-        width={280}
-        title={
-          <div className={styles.drawerTitle}>
-            <Text strong>JSON Tools</Text>
-          </div>
-        }
-      >
         <Menu
-          mode="vertical"
+          theme="dark"
+          mode="inline"
           selectedKeys={[location.pathname]}
           items={menuItems}
-          onClick={({ key }) => handleMenuClick(key)}
-          className={styles.drawerMenu}
+          onClick={({ key }) => navigate(key)}
         />
-        <div className={styles.drawerFooter}>
-          <Button
-            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
-            onClick={() => { onToggleTheme(); }}
-            block
-            style={{ marginBottom: 8 }}
-          >
-            {isDark ? '亮色模式' : '暗色模式'}
-          </Button>
+        <div style={{ position: 'absolute', bottom: 20, left: 0, right: 0, padding: '0 16px' }}>
           <Dropdown menu={{ items: languageItems }} placement="topLeft">
             <Button icon={<GlobalOutlined />} block>
               {t('language.switch')}
             </Button>
           </Dropdown>
         </div>
-      </Drawer>
-
-      {/* Main Content */}
+      </Sider>
       <AntLayout className={styles.main}>
+        <Header className={styles.header}>
+          <Title level={4} className={styles.headerTitle}>
+            {menuItems.find(item => item.key === location.pathname)?.label || t('app.title')}
+          </Title>
+        </Header>
         <Content className={styles.content}>
           {children}
         </Content>
