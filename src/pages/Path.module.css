@@ -1,0 +1,232 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.pathCard {
+  margin-bottom: 16px;
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.pathInput {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  color: #fff !important;
+}
+
+.inputRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pathInputField {
+  flex: 1;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.pathInputField :global(.ant-input) {
+  background: #16162a !important;
+  border-color: #2a2a4a !important;
+  color: #fff !important;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.pathInputField :global(.ant-input):focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) !important;
+}
+
+.exampleOption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exampleOption code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.exampleDesc {
+  font-size: 12px;
+  color: #888;
+}
+
+.alert {
+  margin-bottom: 16px;
+}
+
+.editors {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 16px;
+}
+
+.editorPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1e1e3a;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #2a2a4a;
+  border-bottom: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.editorPanel > div:last-child {
+  flex: 1;
+}
+
+.helpCollapse {
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.helpCollapse :global(.ant-collapse-header) {
+  color: #fff !important;
+}
+
+.helpCollapse :global(.ant-collapse-content) {
+  background: #16162a !important;
+  border-color: #2a2a4a !important;
+}
+
+.helpCollapse :global(.ant-collapse-content-box) {
+  color: #fff;
+}
+
+.syntaxHelp {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.syntaxRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #1e1e3a;
+  border-radius: 6px;
+}
+
+.syntaxRow code {
+  background: #6366f1;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  min-width: 120px;
+}
+
+.syntaxRow span {
+  color: #888;
+  font-size: 13px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toolbar :global(.ant-space) {
+    flex-wrap: nowrap;
+  }
+
+  .toolbar :global(.ant-btn) {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .inputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pathInputField {
+    width: 100%;
+  }
+
+  .inputRow :global(.ant-select) {
+    width: 100% !important;
+  }
+
+  .editors {
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .editorPanel {
+    min-width: 100%;
+    min-height: 200px;
+  }
+
+  .syntaxHelp {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toolbar {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .toolbar :global(.ant-btn) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .editors {
+    gap: 8px;
+  }
+
+  .editorPanel {
+    min-height: 180px;
+  }
+
+  .syntaxRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .syntaxRow code {
+    min-width: auto;
+  }
+}

@@ -1,0 +1,210 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.stats {
+  margin-bottom: 16px;
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.stats :global(.ant-statistic-title) {
+  color: #888 !important;
+}
+
+.stats :global(.ant-statistic-content) {
+  color: #fff !important;
+}
+
+.editors {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 16px;
+}
+
+.editorPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1e1e3a;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #2a2a4a;
+  border-bottom: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.editorPanel > div:last-child {
+  flex: 1;
+}
+
+.diffResult {
+  background: #1e1e3a;
+  border-radius: 8px;
+  border: 1px solid #2a2a4a;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.diffHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #16162a;
+  border-bottom: 1px solid #2a2a4a;
+  color: #fff;
+  font-weight: 500;
+}
+
+.diffContent {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+}
+
+.diffContent pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.diffLine {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.line {
+  display: flex;
+  min-height: 20px;
+}
+
+.linePrefix {
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.lineContent {
+  flex: 1;
+}
+
+.added {
+  background: rgba(82, 196, 26, 0.15);
+}
+
+.added .linePrefix {
+  color: #52c41a;
+}
+
+.removed {
+  background: rgba(255, 77, 79, 0.15);
+}
+
+.removed .linePrefix {
+  color: #ff4d4f;
+}
+
+.unchanged {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.modified {
+  background: rgba(250, 173, 20, 0.15);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toolbar :global(.ant-space) {
+    flex-wrap: nowrap;
+  }
+
+  .toolbar :global(.ant-btn) {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .stats {
+    margin-bottom: 12px;
+  }
+
+  .stats :global(.ant-col) {
+    margin-bottom: 8px;
+  }
+
+  .editors {
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .editorPanel {
+    min-width: 100%;
+    min-height: 200px;
+  }
+
+  .diffResult {
+    max-height: 300px;
+  }
+
+  .diffContent pre {
+    font-size: 12px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toolbar {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .toolbar :global(.ant-btn) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .editors {
+    gap: 8px;
+  }
+
+  .editorPanel {
+    min-height: 180px;
+  }
+
+  .diffResult {
+    max-height: 250px;
+  }
+}
