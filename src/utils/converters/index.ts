@@ -1,6 +1,6 @@
 import { parseJson } from '../json';
 
-export type ConverterFormat = 'yaml' | 'xml' | 'toml';
+export type ConverterFormat = 'yaml' | 'xml' | 'urlparams';
 
 export const jsonToYaml = (jsonText: string): { success: boolean; data?: string; error?: string } => {
   const result = parseJson(jsonText);
@@ -19,18 +19,14 @@ export const jsonToYaml = (jsonText: string): { success: boolean; data?: string;
 const convertToYaml = (data: unknown, indent: number): string => {
   const spaces = '  '.repeat(indent);
   
-  if (data === null) {
-    return 'null';
-  }
-  if (data === undefined) {
+  if (data === null || data === undefined) {
     return 'null';
   }
   
   const type = typeof data;
   
   if (type === 'string') {
-    // Check if string contains special characters
-    if ((data as string).includes('\n') || (data as string).includes(':') || (data as string).includes('#')) {
+    if ((data as string).includes('\n') || (data as string).includes(':')) {
       return `"${(data as string).replace(/"/g, '\\"')}"`;
     }
     return data as string;
