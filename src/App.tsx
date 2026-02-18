@@ -2,7 +2,6 @@ import './i18n';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider, theme } from 'antd';
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import Layout from './components/Layout';
 import Format from './pages/Format';
 import Converter from './pages/Converter';
