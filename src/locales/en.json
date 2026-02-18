@@ -145,3 +145,10 @@
     "zh": "中文"
   }
 }
+  },
+  "theme": {
+    "dark": "Dark Mode",
+    "light": "Light Mode",
+    "auto": "System"
+  }
+}

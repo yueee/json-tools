@@ -143,5 +143,10 @@
     "switch": "语言",
     "en": "English",
     "zh": "中文"
+  },
+  "theme": {
+    "dark": "暗色模式",
+    "light": "亮色模式",
+    "auto": "跟随系统"
   }
 }

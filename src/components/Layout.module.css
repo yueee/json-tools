@@ -1,8 +1,18 @@
+@import '../styles/design-system.css';
+
+/* ============================================
+   Layout
+   ============================================ */
+
 .layout {
   min-height: 100vh;
+  background: var(--bg-base);
 }
 
-/* Top Navigation Bar */
+/* ============================================
+   Top Navigation Bar
+   ============================================ */
+
 .topNav {
   position: fixed;
   top: 0;
@@ -13,23 +23,45 @@
   display: flex;
   align-items: center;
   padding: 0 24px;
-  gap: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  gap: 24px;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
+  gap: 10px;
   flex-shrink: 0;
 }
 
-.logoText {
-  margin: 0 !important;
-  font-weight: 600 !important;
-  white-space: nowrap;
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
 }
 
-/* Desktop Navigation Menu */
+.logoText {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Desktop Navigation */
 .desktopMenu {
   flex: 1;
   display: flex;
@@ -44,16 +76,34 @@
 }
 
 .menu :global(.ant-menu-item) {
-  border-bottom: 2px solid transparent !important;
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: var(--radius-md) !important;
   margin: 0 4px !important;
   padding: 0 16px !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.menu :global(.ant-menu-item:hover) {
+  color: var(--text-primary) !important;
+  background: var(--bg-hover) !important;
+}
+
+.menu :global(.ant-menu-item-selected) {
+  color: var(--primary-light) !important;
+  background: var(--bg-hover) !important;
+}
+
+.menu :global(.ant-menu-item)::after {
+  display: none !important;
 }
 
 /* Right Actions */
 .rightActions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -61,75 +111,149 @@
 .langBtn {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.themeBtn:hover,
+.langBtn:hover {
+  color: var(--text-primary) !important;
+  background: var(--bg-hover) !important;
+  border-color: var(--border-hover) !important;
+}
+
+.langBtn {
+  width: auto;
+  padding: 0 12px !important;
+  gap: 6px;
+  font-size: 13px;
 }
 
 /* Mobile Menu Button */
 .mobileMenuBtn {
   display: none;
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-secondary) !important;
+  margin-left: auto;
 }
 
-/* Main Content Area */
+/* ============================================
+   Main Content
+   ============================================ */
+
 .main {
   margin-top: 64px;
+  background: var(--bg-base);
+  min-height: calc(100vh - 64px);
 }
 
 .content {
   margin: 24px;
   padding: 24px;
-  border-radius: 8px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
   min-height: calc(100vh - 112px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Mobile Drawer */
+/* ============================================
+   Mobile Drawer
+   ============================================ */
+
 .drawer :global(.ant-drawer-header) {
-  padding: 16px 24px;
+  padding: 16px 20px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.drawerTitle {
-  display: flex;
-  align-items: center;
+.drawer :global(.ant-drawer-title) {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.drawer :global(.ant-drawer-close) {
+  color: var(--text-secondary);
+}
+
+.drawer :global(.ant-drawer-body) {
+  padding: 0;
+  background: var(--bg-elevated);
 }
 
 .drawerMenu {
   background: transparent !important;
   border: none !important;
+  padding: 8px !important;
 }
 
 .drawerMenu :global(.ant-menu-item) {
-  margin: 4px 12px !important;
-  border-radius: 6px !important;
+  color: var(--text-secondary) !important;
+  margin: 4px 0 !important;
+  border-radius: var(--radius-md) !important;
+  padding: 12px 16px !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+}
+
+.drawerMenu :global(.ant-menu-item:hover) {
+  color: var(--text-primary) !important;
+  background: var(--bg-hover) !important;
+}
+
+.drawerMenu :global(.ant-menu-item-selected) {
+  color: var(--primary-light) !important;
+  background: var(--bg-hover) !important;
 }
 
 .drawerFooter {
-  padding: 16px 24px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-subtle);
   margin-top: 16px;
 }
 
-/* Mobile Responsive */
+/* ============================================
+   Responsive
+   ============================================ */
+
 @media (max-width: 768px) {
   .topNav {
     padding: 0 16px;
   }
 
-  .desktopMenu {
-    display: none;
-  }
-
+  .desktopMenu,
   .rightActions {
     display: none;
   }
 
   .mobileMenuBtn {
     display: flex;
-    margin-left: auto;
   }
 
   .content {
     margin: 12px;
-    padding: 12px;
+    padding: 16px;
     min-height: calc(100vh - 88px);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: 16px !important;
+  }
+
+  .content {
+    margin: 8px;
+    padding: 12px;
+    border-radius: var(--radius-md);
   }
 }
