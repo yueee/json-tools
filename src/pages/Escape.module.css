@@ -1,0 +1,206 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.modeCard {
+  margin-bottom: 16px;
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.modeRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.modeLabel {
+  color: #fff !important;
+}
+
+.modeDescription {
+  color: #888;
+  font-size: 13px;
+  margin-left: auto;
+}
+
+.editors {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 16px;
+}
+
+.editorPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1e1e3a;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #2a2a4a;
+  border-bottom: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.editorPanel > div:last-child {
+  flex: 1;
+}
+
+.arrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+}
+
+.arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.quickActions {
+  margin-top: auto;
+}
+
+.quickActions :global(.ant-card) {
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.quickActions :global(.ant-card-head) {
+  border-color: #2a2a4a !important;
+  color: #fff !important;
+}
+
+.quickActions :global(.ant-card-body) {
+  color: #fff;
+}
+
+.quickActions :global(.ant-tabs-tab) {
+  color: #888 !important;
+}
+
+.quickActions :global(.ant-tabs-tab-active) {
+  color: #fff !important;
+}
+
+.quickActions :global(.ant-tabs-ink-bar) {
+  background: #6366f1 !important;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.example {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #16162a;
+  border-radius: 6px;
+}
+
+.example span {
+  color: #6366f1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toolbar :global(.ant-space) {
+    flex-wrap: nowrap;
+  }
+
+  .toolbar :global(.ant-btn) {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .modeRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .modeDescription {
+    margin-left: 0;
+    font-size: 12px;
+  }
+
+  .editors {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .arrowContainer {
+    display: none;
+  }
+
+  .editorPanel {
+    min-width: 100%;
+    min-height: 180px;
+  }
+
+  .example {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .toolbar {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .toolbar :global(.ant-btn) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .editors {
+    gap: 8px;
+  }
+
+  .editorPanel {
+    min-height: 160px;
+  }
+}
