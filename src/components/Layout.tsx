@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout as AntLayout, Menu, Typography, Button, Space, Dropdown, Drawer } from 'antd';
+import { Layout as AntLayout, Menu, Button, Space, Dropdown, Drawer } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
@@ -14,12 +14,11 @@ import {
   DiffOutlined,
   SearchOutlined,
   ToolOutlined,
-  DiceOutlined
+  DatabaseOutlined
 } from '@ant-design/icons';
 import styles from './Layout.module.css';
 
 const { Content } = AntLayout;
-const { Text } = Typography;
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -66,7 +65,7 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
     },
     {
       key: '/mock',
-      icon: <DiceOutlined />,
+      icon: <DatabaseOutlined />,
       label: t('nav.mock'),
     },
   ];

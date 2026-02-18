@@ -1,6 +1,6 @@
 import './i18n';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ConfigProvider, theme, Button } from 'antd';
+import { ConfigProvider, theme } from 'antd';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Layout from './components/Layout';
@@ -15,7 +15,6 @@ import './App.css';
 import './styles/design-system.css';
 
 function App() {
-  const { t, i18n } = useTranslation();
   const [isDark, setIsDark] = useState(true);
 
   // Check theme preference on mount
@@ -40,7 +39,7 @@ function App() {
   };
 
   const themeConfig = {
-    algorithm: isDark ? theme.darkAlgorithm : theme.lightAlgorithm,
+    algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
     token: {
       colorPrimary: '#6366f1',
       colorBgContainer: isDark ? '#12121a' : '#ffffff',
