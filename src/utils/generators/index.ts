@@ -122,7 +122,7 @@ const generateGoStruct = (data: unknown, typeName: string, generated: Set<string
     if (data.length === 0) {
       return `type ${typeName} []interface{}\n`;
     }
-    const itemType = inferGoType(data[0], typeName + 'Item', generated);
+    const itemType = inferGoType(data[0]);
     return `type ${typeName} []${itemType}\n`;
   }
   
@@ -133,7 +133,7 @@ const generateGoStruct = (data: unknown, typeName: string, generated: Set<string
   for (const key of Object.keys(obj)) {
     const value = obj[key];
     const fieldName = capitalize(key);
-    const fieldType = inferGoType(value, typeName + fieldName, generated);
+    const fieldType = inferGoType(value);
     const jsonTag = '`json:"' + key + '"`';
     fields.push(`\t${fieldName} ${fieldType} ${jsonTag}`);
   }
@@ -142,26 +142,26 @@ const generateGoStruct = (data: unknown, typeName: string, generated: Set<string
   return structs.join('\n\n');
 };
 
-const inferGoType = (value: unknown, typeName: string, generated: Set<string>): string => {
+const inferGoType = (value: unknown): string => {
   if (value === null) return 'interface{}';
   
   const type = typeof value;
   
   if (type === 'string') return 'string';
   if (type === 'number') {
-    if (Number.isInteger(value)) return 'int64';
+    if (typeof value === 'number' && Number.isInteger(value)) return 'int64';
     return 'float64';
   }
   if (type === 'boolean') return 'bool';
   
   if (Array.isArray(value)) {
     if (value.length === 0) return '[]interface{}';
-    const itemType = inferGoType(value[0], typeName + 'Item', generated);
+    const itemType = inferGoType(value[0]);
     return `[]${itemType}`;
   }
   
   if (type === 'object') {
-    return '*' + typeName;
+    return 'interface{}';
   }
   
   return 'interface{}';
@@ -208,7 +208,7 @@ const generatePythonDataclass = (data: unknown, className: string, generated: Se
     if (data.length === 0) {
       return `${Array.from(imports).join('\n')}\n\n${className} = List[Any]\n`;
     }
-    const itemType = inferPythonType(data[0], className + 'Item', imports, generated);
+    const itemType = inferPythonType(data[0], imports);
     return `${Array.from(imports).join('\n')}\n\n${className} = List[${itemType}]\n`;
   }
   
@@ -219,7 +219,7 @@ const generatePythonDataclass = (data: unknown, className: string, generated: Se
   for (const key of Object.keys(obj)) {
     const value = obj[key];
     const safeName = key.replace(/[^a-zA-Z0-9_]/g, '_').replace(/^([0-9])/, '_$1');
-    const fieldType = inferPythonType(value, className + '_' + safeName, imports, generated);
+    const fieldType = inferPythonType(value, imports);
     fields.push(`    ${safeName}: ${fieldType}`);
   }
   
@@ -228,19 +228,14 @@ const generatePythonDataclass = (data: unknown, className: string, generated: Se
   return `${Array.from(imports).join('\n')}\n\n${classes.join('\n\n')}\n`;
 };
 
-const inferPythonType = (
-  value: unknown, 
-  className: string, 
-  imports: Set<string>, 
-  generated: Set<string>
-): string => {
+const inferPythonType = (value: unknown, imports: Set<string>): string => {
   if (value === null) return 'Optional[Any]';
   
   const type = typeof value;
   
   if (type === 'string') return 'str';
   if (type === 'number') {
-    if (Number.isInteger(value)) return 'int';
+    if (typeof value === 'number' && Number.isInteger(value)) return 'int';
     return 'float';
   }
   if (type === 'boolean') return 'bool';
@@ -248,12 +243,12 @@ const inferPythonType = (
   if (Array.isArray(value)) {
     imports.add('from typing import List');
     if (value.length === 0) return 'List[Any]';
-    const itemType = inferPythonType(value[0], className + 'Item', imports, generated);
+    const itemType = inferPythonType(value[0], imports);
     return `List[${itemType}]`;
   }
   
   if (type === 'object') {
-    return className;
+    return 'dict';
   }
   
   return 'Any';
@@ -291,7 +286,7 @@ const generateJavaPojo = (data: unknown, className: string, generated: Set<strin
     if (data.length === 0) {
       return `public class ${className} extends ArrayList<Object> {}\n`;
     }
-    const itemType = inferJavaType(data[0], className + 'Item', generated);
+    const itemType = inferJavaType(data[0]);
     return `public class ${className} extends ArrayList<${itemType}> {}\n`;
   }
   
@@ -303,7 +298,7 @@ const generateJavaPojo = (data: unknown, className: string, generated: Set<strin
   for (const key of Object.keys(obj)) {
     const value = obj[key];
     const fieldName = sanitizeJavaFieldName(key);
-    const fieldType = inferJavaType(value, className + capitalize(fieldName), generated);
+    const fieldType = inferJavaType(value);
     
     fields.push(`    private ${fieldType} ${fieldName};`);
     
@@ -317,26 +312,26 @@ const generateJavaPojo = (data: unknown, className: string, generated: Set<strin
   return classes.join('\n\n');
 };
 
-const inferJavaType = (value: unknown, className: string, generated: Set<string>): string => {
+const inferJavaType = (value: unknown): string => {
   if (value === null) return 'Object';
   
   const type = typeof value;
   
   if (type === 'string') return 'String';
   if (type === 'number') {
-    if (Number.isInteger(value)) return 'Long';
+    if (typeof value === 'number' && Number.isInteger(value)) return 'Long';
     return 'Double';
   }
   if (type === 'boolean') return 'Boolean';
   
   if (Array.isArray(value)) {
     if (value.length === 0) return 'List<Object>';
-    const itemType = inferJavaType(value[0], className + 'Item', generated);
+    const itemType = inferJavaType(value[0]);
     return `List<${itemType}>`;
   }
   
   if (type === 'object') {
-    return className;
+    return 'Object';
   }
   
   return 'Object';
@@ -382,7 +377,7 @@ const generateCSharpClass = (data: unknown, className: string, generated: Set<st
     if (data.length === 0) {
       return `public class ${className} : List<object> {}\n`;
     }
-    const itemType = inferCSharpType(data[0], className + 'Item', generated);
+    const itemType = inferCSharpType(data[0]);
     return `public class ${className} : List<${itemType}> {}\n`;
   }
   
@@ -393,38 +388,36 @@ const generateCSharpClass = (data: unknown, className: string, generated: Set<st
   for (const key of Object.keys(obj)) {
     const value = obj[key];
     const propName = capitalize(sanitizeJavaFieldName(key));
-    const propType = inferCSharpType(value, className + propName, generated);
+    const propType = inferCSharpType(value);
     
-    const jsonProperty = `[JsonPropertyName("${key}")]`;
-    properties.push(`    ${jsonProperty}`);
     properties.push(`    public ${propType} ${propName} { get; set; }`);
   }
   
-  classes.push(`using System.Text.Json.Serialization;\n\npublic class ${className}\n{\n${properties.join('\n')}\n}`);
+  classes.push(`public class ${className}\n{\n${properties.join('\n')}\n}`);
   
   return classes.join('\n\n');
 };
 
-const inferCSharpType = (value: unknown, className: string, generated: Set<string>): string => {
-  if (value === null) return 'object?';
+const inferCSharpType = (value: unknown): string => {
+  if (value === null) return 'object';
   
   const type = typeof value;
   
   if (type === 'string') return 'string';
   if (type === 'number') {
-    if (Number.isInteger(value)) return 'long';
+    if (typeof value === 'number' && Number.isInteger(value)) return 'long';
     return 'double';
   }
   if (type === 'boolean') return 'bool';
   
   if (Array.isArray(value)) {
     if (value.length === 0) return 'List<object>';
-    const itemType = inferCSharpType(value[0], className + 'Item', generated);
+    const itemType = inferCSharpType(value[0]);
     return `List<${itemType}>`;
   }
   
   if (type === 'object') {
-    return className;
+    return 'object';
   }
   
   return 'object';
