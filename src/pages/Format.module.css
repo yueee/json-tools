@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.stats {
+  margin-bottom: 16px;
+  background: #1e1e3a !important;
+  border-color: #2a2a4a !important;
+}
+
+.stats :global(.ant-statistic-title) {
+  color: #888 !important;
+}
+
+.stats :global(.ant-statistic-content) {
+  color: #fff !important;
+}
+
+.alert {
+  margin-bottom: 16px;
+}
+
+.editors {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.editorPanel {
+  flex: 1;
+  min-width: 0;
+}
