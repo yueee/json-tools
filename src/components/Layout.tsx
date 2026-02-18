@@ -76,7 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme, themeM
       key: 'en',
       label: (
         <Space>
-          {i18n.language === 'en' && <CheckOutlined style={{ color: '#6366f1' }} />}
+          {i18n.language === 'en' && <CheckOutlined style={{ color: '#f43f5e' }} />}
           English
         </Space>
       ),
@@ -86,7 +86,7 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme, themeM
       key: 'zh',
       label: (
         <Space>
-          {i18n.language === 'zh' && <CheckOutlined style={{ color: '#6366f1' }} />}
+          {i18n.language === 'zh' && <CheckOutlined style={{ color: '#f43f5e' }} />}
           中文
         </Space>
       ),

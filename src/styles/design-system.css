@@ -3,25 +3,25 @@
    ============================================ */
 
 :root {
-  /* Brand Colors */
-  --primary: #6366f1;
-  --primary-light: #818cf8;
-  --primary-dark: #4f46e5;
+  /* Brand Colors - 玫瑰红主题 */
+  --primary: #f43f5e;
+  --primary-light: #fb7185;
+  --primary-dark: #e11d48;
   
   /* Gradient */
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-  --gradient-bg: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+  --gradient-primary: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #d946ef 100%);
+  --gradient-bg: linear-gradient(180deg, #0f0a0a 0%, #1a0f15 100%);
   --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
   
   /* Dark Theme */
   --bg-base: #0a0a0f;
   --bg-elevated: #12121a;
   --bg-surface: #1a1a25;
-  --bg-hover: rgba(99, 102, 241, 0.1);
+  --bg-hover: rgba(244, 63, 94, 0.1);
   
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-default: rgba(255, 255, 255, 0.1);
-  --border-hover: rgba(99, 102, 241, 0.3);
+  --border-hover: rgba(244, 63, 94, 0.3);
   
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
@@ -31,7 +31,7 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+  --shadow-glow: 0 0 20px rgba(244, 63, 94, 0.3);
   
   /* Animation */
   --transition-fast: 0.15s ease;
@@ -50,11 +50,11 @@
   --bg-base: #ffffff;
   --bg-elevated: #f8f8fa;
   --bg-surface: #f0f0f2;
-  --bg-hover: rgba(99, 102, 241, 0.08);
+  --bg-hover: rgba(244, 63, 94, 0.08);
   
   --border-subtle: rgba(0, 0, 0, 0.04);
   --border-default: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(99, 102, 241, 0.3);
+  --border-hover: rgba(244, 63, 94, 0.3);
   
   --text-primary: #0a0a0f;
   --text-secondary: #52525b;
