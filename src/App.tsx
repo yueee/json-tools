@@ -15,26 +15,54 @@ import './styles/design-system.css';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
+  const [themeMode, setThemeMode] = useState<'auto' | 'light' | 'dark'>('auto');
 
-  // Check theme preference on mount
+  // Check theme preference on mount and listen to system changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('theme') as 'auto' | 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (savedTheme === 'light') {
       setIsDark(false);
+      setThemeMode('light');
     } else if (savedTheme === 'dark') {
       setIsDark(true);
-    } else if (savedTheme === 'auto' || !savedTheme) {
+      setThemeMode('dark');
+    } else {
+      // Auto mode - follow system
       setIsDark(prefersDark);
+      setThemeMode('auto');
     }
-  }, []);
+
+    // Listen to system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (themeMode === 'auto') {
+        setIsDark(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [themeMode]);
 
   // Handle theme toggle
   const handleToggleTheme = () => {
-    const newTheme = isDark ? 'light' : 'dark';
-    setIsDark(!isDark);
-    localStorage.setItem('theme', newTheme);
+    // Cycle: auto -> light -> dark -> auto
+    if (themeMode === 'auto') {
+      setThemeMode('light');
+      setIsDark(false);
+      localStorage.setItem('theme', 'light');
+    } else if (themeMode === 'light') {
+      setThemeMode('dark');
+      setIsDark(true);
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setThemeMode('auto');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDark(prefersDark);
+      localStorage.setItem('theme', 'auto');
+    }
   };
 
   const themeConfig = {
@@ -53,7 +81,7 @@ function App() {
   return (
     <ConfigProvider theme={themeConfig}>
       <BrowserRouter>
-        <Layout isDark={isDark} onToggleTheme={handleToggleTheme}>
+        <Layout isDark={isDark} onToggleTheme={handleToggleTheme} themeMode={themeMode}>
           <Routes>
             <Route path="/" element={<Format />} />
             <Route path="/converter" element={<Converter />} />

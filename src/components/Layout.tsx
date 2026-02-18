@@ -24,9 +24,10 @@ interface LayoutProps {
   children: React.ReactNode;
   isDark: boolean;
   onToggleTheme: () => void;
+  themeMode: 'auto' | 'light' | 'dark';
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
+const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme, themeMode }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -93,6 +94,26 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
     },
   ];
 
+  const getThemeIcon = () => {
+    if (themeMode === 'auto') {
+      return <GlobalOutlined />;
+    } else if (isDark) {
+      return <MoonOutlined />;
+    } else {
+      return <SunOutlined />;
+    }
+  };
+
+  const getThemeTitle = () => {
+    if (themeMode === 'auto') {
+      return t('theme.auto');
+    } else if (isDark) {
+      return t('theme.dark');
+    } else {
+      return t('theme.light');
+    }
+  };
+
   const handleMenuClick = (key: string) => {
     navigate(key);
     setMobileMenuOpen(false);
@@ -124,10 +145,10 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
         <div className={styles.rightActions}>
           <Button
             type="text"
-            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+            icon={getThemeIcon()}
             onClick={onToggleTheme}
             className={styles.themeBtn}
-            title={isDark ? t('theme.light') : t('theme.dark')}
+            title={getThemeTitle()}
           />
           <Dropdown menu={{ items: languageItems }} placement="bottomRight">
             <Button icon={<GlobalOutlined />} type="text" className={styles.langBtn}>
@@ -168,12 +189,12 @@ const Layout: React.FC<LayoutProps> = ({ children, isDark, onToggleTheme }) => {
         />
         <div className={styles.drawerFooter}>
           <Button
-            icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+            icon={getThemeIcon()}
             onClick={() => { onToggleTheme(); }}
             block
             style={{ marginBottom: 8 }}
           >
-            {isDark ? t('theme.light') : t('theme.dark')}
+            {getThemeTitle()}
           </Button>
           <Dropdown menu={{ items: languageItems }} placement="topLeft">
             <Button icon={<GlobalOutlined />} block>
