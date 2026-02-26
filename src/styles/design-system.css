@@ -3,13 +3,13 @@
    ============================================ */
 
 :root {
-  /* Brand Colors - 玫瑰红主题 */
-  --primary: #f43f5e;
-  --primary-light: #fb7185;
-  --primary-dark: #e11d48;
-  
+  /* Brand Colors - 柔和粉色主题 */
+  --primary: #fda4af;
+  --primary-light: #fecdd3;
+  --primary-dark: #fb7185;
+
   /* Gradient */
-  --gradient-primary: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #d946ef 100%);
+  --gradient-primary: linear-gradient(135deg, #fda4af 0%, #f9a8d4 50%, #d8b4fe 100%);
   --gradient-bg: linear-gradient(180deg, #0f0a0a 0%, #1a0f15 100%);
   --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
   

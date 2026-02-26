@@ -83,7 +83,7 @@ function App() {
   const themeConfig = {
     algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
     token: {
-      colorPrimary: '#f43f5e',
+      colorPrimary: '#fda4af',
       colorBgContainer: isDark ? '#12121a' : '#ffffff',
       colorBgElevated: isDark ? '#1a1a25' : '#f8f8fa',
       colorBorder: isDark ? '#2a2a4a' : '#e0e0e0',
