@@ -11,6 +11,7 @@ import {
   generateCSharp
 } from '../utils/generators';
 import type { GeneratorLanguage } from '../utils/generators';
+import { useTheme } from '../ThemeContext';
 import styles from './Generator.module.css';
 
 const generatorOptions = [
@@ -31,6 +32,7 @@ const languageMap: Record<GeneratorLanguage, string> = {
 
 const Generator: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [language, setLanguage] = useState<GeneratorLanguage>('typescript');
@@ -108,19 +110,21 @@ const Generator: React.FC = () => {
       
       <div className={styles.editors}>
         <div className={styles.editorPanel}>
-          <CodeEditor 
+          <CodeEditor
             value={input}
             onChange={setInput}
             language="json"
             title={t('common.input')}
+            isDark={isDark}
           />
         </div>
         <div className={styles.editorPanel}>
-          <CodeEditor 
+          <CodeEditor
             value={output}
             language={languageMap[language]}
             readOnly
             title={t('generator.outputCode')}
+            isDark={isDark}
           />
         </div>
       </div>

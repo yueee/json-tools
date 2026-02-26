@@ -5,10 +5,12 @@ import { SwapOutlined, CopyOutlined } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { jsonToYaml, jsonToXml, jsonToUrlParams } from '../utils/converters';
 import type { ConverterFormat } from '../utils/converters';
+import { useTheme } from '../ThemeContext';
 import styles from './Converter.module.css';
 
 const Converter: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [format, setFormat] = useState<ConverterFormat | 'urlparams'>('yaml');
@@ -90,19 +92,21 @@ const Converter: React.FC = () => {
       
       <div className={styles.editors}>
         <div className={styles.editorPanel}>
-          <CodeEditor 
+          <CodeEditor
             value={input}
             onChange={setInput}
             language="json"
             title={t('common.input')}
+            isDark={isDark}
           />
         </div>
         <div className={styles.editorPanel}>
-          <CodeEditor 
+          <CodeEditor
             value={output}
             language={getOutputLanguage()}
             readOnly
             title={t('converter.outputCode')}
+            isDark={isDark}
           />
         </div>
       </div>

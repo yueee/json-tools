@@ -9,6 +9,7 @@ interface EditorProps {
   language?: string;
   readOnly?: boolean;
   title?: string;
+  isDark?: boolean;
 }
 
 const CodeEditor: React.FC<EditorProps> = ({
@@ -17,6 +18,7 @@ const CodeEditor: React.FC<EditorProps> = ({
   language = 'json',
   readOnly = false,
   title,
+  isDark = true,
 }) => {
   return (
     <div className={styles.container}>
@@ -27,7 +29,7 @@ const CodeEditor: React.FC<EditorProps> = ({
           language={language}
           value={value}
           onChange={(v) => onChange?.(v || '')}
-          theme="vs-dark"
+          theme={isDark ? 'vs-dark' : 'vs'}
           loading={<Spin tip="Loading editor..." />}
           options={{
             readOnly,

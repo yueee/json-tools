@@ -9,6 +9,7 @@ import {
   SwapOutlined
 } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
+import { useTheme } from '../ThemeContext';
 import styles from './Escape.module.css';
 
 const { Text } = Typography;
@@ -17,6 +18,7 @@ type EscapeMode = 'json' | 'unicode' | 'base64';
 
 const EscapePage: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [mode, setMode] = useState<EscapeMode>('json');
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -208,6 +210,7 @@ const EscapePage: React.FC = () => {
             value={input}
             onChange={setInput}
             language={mode === 'json' ? 'json' : 'plaintext'}
+            isDark={isDark}
           />
         </div>
         <div className={styles.arrowContainer}>
@@ -223,6 +226,7 @@ const EscapePage: React.FC = () => {
             value={output}
             language={mode === 'json' ? 'json' : 'plaintext'}
             readOnly
+            isDark={isDark}
           />
         </div>
       </div>

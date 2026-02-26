@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { parseJson } from '../utils/json';
+import { useTheme } from '../ThemeContext';
 import * as Diff from 'diff';
 import styles from './Diff.module.css';
 
@@ -23,6 +24,7 @@ interface DiffResult {
 
 const DiffPage: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [leftInput, setLeftInput] = useState('');
   const [rightInput, setRightInput] = useState('');
   const [diffResult, setDiffResult] = useState<DiffResult[]>([]);
@@ -200,6 +202,7 @@ const DiffPage: React.FC = () => {
             value={leftInput}
             onChange={setLeftInput}
             language="json"
+            isDark={isDark}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -213,6 +216,7 @@ const DiffPage: React.FC = () => {
             value={rightInput}
             onChange={setRightInput}
             language="json"
+            isDark={isDark}
           />
         </div>
       </div>

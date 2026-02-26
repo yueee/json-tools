@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider, theme } from 'antd';
 import { useState, useEffect } from 'react';
 import Layout from './components/Layout';
+import { ThemeProvider } from './ThemeContext';
 import Format from './pages/Format';
 import Converter from './pages/Converter';
 import Generator from './pages/Generator';
@@ -95,19 +96,21 @@ function App() {
 
   return (
     <ConfigProvider theme={themeConfig}>
-      <BrowserRouter>
-        <Layout isDark={isDark} onToggleTheme={handleToggleTheme} themeMode={themeMode}>
-          <Routes>
-            <Route path="/" element={<Format />} />
-            <Route path="/converter" element={<Converter />} />
-            <Route path="/generator" element={<Generator />} />
-            <Route path="/diff" element={<Diff />} />
-            <Route path="/path" element={<Path />} />
-            <Route path="/escape" element={<Escape />} />
-            <Route path="/mock" element={<Mock />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <ThemeProvider isDark={isDark}>
+        <BrowserRouter>
+          <Layout isDark={isDark} onToggleTheme={handleToggleTheme} themeMode={themeMode}>
+            <Routes>
+              <Route path="/" element={<Format />} />
+              <Route path="/converter" element={<Converter />} />
+              <Route path="/generator" element={<Generator />} />
+              <Route path="/diff" element={<Diff />} />
+              <Route path="/path" element={<Path />} />
+              <Route path="/escape" element={<Escape />} />
+              <Route path="/mock" element={<Mock />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </ThemeProvider>
     </ConfigProvider>
   );
 }

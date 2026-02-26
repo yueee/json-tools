@@ -9,6 +9,7 @@ import {
   DeleteOutlined
 } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
+import { useTheme } from '../ThemeContext';
 import styles from './Mock.module.css';
 
 const { Panel } = Collapse;
@@ -153,6 +154,7 @@ const generators: Record<string, () => unknown> = {
 
 const MockPage: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [fields, setFields] = useState<FieldConfig[]>([
     { key: '1', name: 'id', type: 'id' },
     { key: '2', name: 'name', type: 'name' },
@@ -381,6 +383,7 @@ const MockPage: React.FC = () => {
             value={output}
             language="json"
             readOnly
+            isDark={isDark}
           />
         </div>
       </div>

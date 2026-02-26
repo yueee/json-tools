@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { parseJson } from '../utils/json';
+import { useTheme } from '../ThemeContext';
 import { JSONPath } from 'jsonpath-plus';
 import styles from './Path.module.css';
 
@@ -44,6 +45,7 @@ const SAMPLE_JSON = {
 
 const PathPage: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [input, setInput] = useState(JSON.stringify(SAMPLE_JSON, null, 2));
   const [pathExpr, setPathExpr] = useState('$');
   const [result, setResult] = useState<string>('');
@@ -186,6 +188,7 @@ const PathPage: React.FC = () => {
             value={input}
             onChange={setInput}
             language="json"
+            isDark={isDark}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -201,6 +204,7 @@ const PathPage: React.FC = () => {
             value={result}
             language="json"
             readOnly
+            isDark={isDark}
           />
         </div>
       </div>

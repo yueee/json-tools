@@ -10,10 +10,12 @@ import {
 } from '@ant-design/icons';
 import CodeEditor from '../components/Editor';
 import { formatJson, minifyJson, validateJson, getJsonStats } from '../utils/json';
+import { useTheme } from '../ThemeContext';
 import styles from './Format.module.css';
 
 const Format: React.FC = () => {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
 
@@ -156,6 +158,7 @@ const Format: React.FC = () => {
             onChange={setInput}
             language="json"
             title={t('common.input')}
+            isDark={isDark}
           />
         </div>
         <div className={styles.editorPanel}>
@@ -164,6 +167,7 @@ const Format: React.FC = () => {
             language="json"
             readOnly
             title={t('common.outputResult')}
+            isDark={isDark}
           />
         </div>
       </div>
